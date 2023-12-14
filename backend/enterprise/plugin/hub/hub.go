@@ -2,6 +2,7 @@ package hub
 
 import (
 	"context"
+	"fmt"
 	"log/slog"
 	"time"
 
@@ -143,6 +144,8 @@ func (p *Provider) parseLicense(license string) (*enterprise.License, error) {
 	if err := parseJWTToken(license, p.config.Version, p.config.PublicKey, claim); err != nil {
 		return nil, common.Wrap(err, common.Invalid)
 	}
+
+	fmt.Println(claim)
 
 	return p.parseClaims(claim)
 }
